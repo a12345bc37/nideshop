@@ -1,0 +1,50 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/api/controller/index.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "banner",
+        "model",
+        "where",
+        "ad_position_id",
+        "select",
+        "channel",
+        "order",
+        "sort_order",
+        "newGoods",
+        "field",
+        "is_new",
+        "limit",
+        "hotGoods",
+        "is_hot",
+        "brandList",
+        "new_sort_order",
+        "topicList",
+        "categoryList",
+        "parent_id",
+        "name",
+        "newCategoryList",
+        "categoryItem",
+        "childCategoryIds",
+        "id",
+        "getField",
+        "categoryGoods",
+        "category_id",
+        "push",
+        "goodsList",
+        "success",
+        "newGoodsList",
+        "hotGoodsList"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;;AAEAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC5BI,aAAN,GAAoB;AAAA;;AAAA;AAClB,YAAMC,SAAS,MAAM,MAAKC,KAAL,CAAW,IAAX,EAAiBC,KAAjB,CAAuB,EAAEC,gBAAgB,CAAlB,EAAvB,EAA8CC,MAA9C,EAArB;AACA,YAAMC,UAAU,MAAM,MAAKJ,KAAL,CAAW,SAAX,EAAsBK,KAAtB,CAA4B,EAAEC,YAAY,KAAd,EAA5B,EAAmDH,MAAnD,EAAtB;AACA,YAAMI,WAAW,MAAM,MAAKP,KAAL,CAAW,OAAX,EAAoBQ,KAApB,CAA0B,CAAC,IAAD,EAAO,MAAP,EAAe,cAAf,EAA+B,cAA/B,CAA1B,EAA0EP,KAA1E,CAAgF,EAAEQ,QAAQ,CAAV,EAAhF,EAA+FC,KAA/F,CAAqG,CAArG,EAAwGP,MAAxG,EAAvB;AACA,YAAMQ,WAAW,MAAM,MAAKX,KAAL,CAAW,OAAX,EAAoBQ,KAApB,CAA0B,CAAC,IAAD,EAAO,MAAP,EAAe,cAAf,EAA+B,cAA/B,EAA+C,aAA/C,CAA1B,EAAyFP,KAAzF,CAA+F,EAAEW,QAAQ,CAAV,EAA/F,EAA8GF,KAA9G,CAAoH,CAApH,EAAuHP,MAAvH,EAAvB;AACA,YAAMU,YAAY,MAAM,MAAKb,KAAL,CAAW,OAAX,EAAoBC,KAApB,CAA0B,EAAEQ,QAAQ,CAAV,EAA1B,EAAyCJ,KAAzC,CAA+C,EAAES,gBAAgB,KAAlB,EAA/C,EAA0EJ,KAA1E,CAAgF,CAAhF,EAAmFP,MAAnF,EAAxB;AACA,YAAMY,YAAY,MAAM,MAAKf,KAAL,CAAW,OAAX,EAAoBU,KAApB,CAA0B,CAA1B,EAA6BP,MAA7B,EAAxB;;AAEA,YAAMa,eAAe,MAAM,MAAKhB,KAAL,CAAW,UAAX,EAAuBC,KAAvB,CAA6B,EAAEgB,WAAW,CAAb,EAAgBC,MAAM,CAAC,IAAD,EAAO,IAAP,CAAtB,EAA7B,EAAmEf,MAAnE,EAA3B;AACA,YAAMgB,kBAAkB,EAAxB;AACA,WAAK,MAAMC,YAAX,IAA2BJ,YAA3B,EAAyC;AACvC,cAAMK,mBAAmB,MAAM,MAAKrB,KAAL,CAAW,UAAX,EAAuBC,KAAvB,CAA6B,EAAEgB,WAAWG,aAAaE,EAA1B,EAA7B,EAA6DC,QAA7D,CAAsE,IAAtE,EAA4E,GAA5E,CAA/B;AACA,cAAMC,gBAAgB,MAAM,MAAKxB,KAAL,CAAW,OAAX,EAAoBQ,KAApB,CAA0B,CAAC,IAAD,EAAO,MAAP,EAAe,cAAf,EAA+B,cAA/B,CAA1B,EAA0EP,KAA1E,CAAgF,EAAEwB,aAAa,CAAC,IAAD,EAAOJ,gBAAP,CAAf,EAAhF,EAA2HX,KAA3H,CAAiI,CAAjI,EAAoIP,MAApI,EAA5B;AACAgB,wBAAgBO,IAAhB,CAAqB;AACnBJ,cAAIF,aAAaE,EADE;AAEnBJ,gBAAME,aAAaF,IAFA;AAGnBS,qBAAWH;AAHQ,SAArB;AAKD;;AAED,aAAO,MAAKI,OAAL,CAAa;AAClB7B,gBAAQA,MADU;AAElBK,iBAASA,OAFS;AAGlByB,sBAActB,QAHI;AAIlBuB,sBAAcnB,QAJI;AAKlBE,mBAAWA,SALO;AAMlBE,mBAAWA,SANO;AAOlBC,sBAAcG;AAPI,OAAb,CAAP;AApBkB;AA6BnB;AA9BiC,CAApC",
+    "file": "../../../src/api/controller/index.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n  async indexAction() {\n    const banner = await this.model('ad').where({ ad_position_id: 2 }).select();\n    const channel = await this.model('channel').order({ sort_order: 'asc' }).select();\n    const newGoods = await this.model('goods').field(['id', 'name', 'list_pic_url', 'retail_price']).where({ is_new: 1 }).limit(4).select();\n    const hotGoods = await this.model('goods').field(['id', 'name', 'list_pic_url', 'retail_price', 'goods_brief']).where({ is_hot: 1 }).limit(3).select();\n    const brandList = await this.model('brand').where({ is_new: 1 }).order({ new_sort_order: 'asc' }).limit(4).select();\n    const topicList = await this.model('topic').limit(3).select();\n\n    const categoryList = await this.model('category').where({ parent_id: 0, name: ['<>', '推荐'] }).select();\n    const newCategoryList = [];\n    for (const categoryItem of categoryList) {\n      const childCategoryIds = await this.model('category').where({ parent_id: categoryItem.id }).getField('id', 100);\n      const categoryGoods = await this.model('goods').field(['id', 'name', 'list_pic_url', 'retail_price']).where({ category_id: ['IN', childCategoryIds] }).limit(7).select();\n      newCategoryList.push({\n        id: categoryItem.id,\n        name: categoryItem.name,\n        goodsList: categoryGoods\n      });\n    }\n\n    return this.success({\n      banner: banner,\n      channel: channel,\n      newGoodsList: newGoods,\n      hotGoodsList: hotGoods,\n      brandList: brandList,\n      topicList: topicList,\n      categoryList: newCategoryList\n    });\n  }\n};\n"
+    ]
+}

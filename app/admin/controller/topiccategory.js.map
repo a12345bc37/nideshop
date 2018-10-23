@@ -1,0 +1,45 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/admin/controller/topiccategory.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "indexAction",
+        "page",
+        "get",
+        "size",
+        "name",
+        "model",
+        "data",
+        "where",
+        "title",
+        "order",
+        "countSelect",
+        "success",
+        "categoryByIdAction",
+        "id",
+        "find",
+        "categoryAction",
+        "infoAction",
+        "storeCategoryAction",
+        "isPost",
+        "values",
+        "post",
+        "console",
+        "log",
+        "update",
+        "add",
+        "destoryAction",
+        "limit",
+        "delete"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;;AAEAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAChC;;;;AAIMI,eAAN,GAAoB;AAAA;;AAAA;AAChB,kBAAMC,OAAO,MAAKC,GAAL,CAAS,MAAT,KAAoB,CAAjC;AACA,kBAAMC,OAAO,MAAKD,GAAL,CAAS,MAAT,KAAoB,EAAjC;AACA,kBAAME,OAAO,MAAKF,GAAL,CAAS,MAAT,KAAoB,EAAjC;;AAEA,kBAAMG,QAAQ,MAAKA,KAAL,CAAW,OAAX,CAAd;AACA,kBAAMC,OAAO,MAAMD,MAAME,KAAN,CAAY,EAAEC,OAAO,CAAC,MAAD,EAAU,IAAGJ,IAAK,GAAlB,CAAT,EAAZ,EAA8CK,KAA9C,CAAoD,CAAC,SAAD,CAApD,EAAiER,IAAjE,CAAsEA,IAAtE,EAA4EE,IAA5E,EAAkFO,WAAlF,EAAnB;;AAEA,mBAAO,MAAKC,OAAL,CAAaL,IAAb,CAAP;AARgB;AASnB;AACKM,sBAAN,GAA2B;AAAA;;AAAA;AACvB,kBAAMC,KAAK,OAAKX,GAAL,CAAS,IAAT,CAAX;AACA,kBAAMG,QAAQ,OAAKA,KAAL,CAAW,OAAX,CAAd;AACA,kBAAMC,OAAO,MAAMD,MAAME,KAAN,CAAY,EAAEM,IAAIA,EAAN,EAAZ,EAAwBC,IAAxB,EAAnB;;AAEA,mBAAO,OAAKH,OAAL,CAAaL,IAAb,CAAP;AALuB;AAM1B;AACKS,kBAAN,GAAuB;AAAA;;AAAA;AACnB,kBAAMV,QAAQ,OAAKA,KAAL,CAAW,gBAAX,CAAd;AACA,kBAAMC,OAAO,MAAMD,MAAMK,WAAN,EAAnB;;AAEA,mBAAO,OAAKC,OAAL,CAAaL,IAAb,CAAP;AAJmB;AAKtB;AACKU,cAAN,GAAmB;AAAA;;AAAA;AACf,kBAAMH,KAAK,OAAKX,GAAL,CAAS,IAAT,CAAX;AACA,kBAAMG,QAAQ,OAAKA,KAAL,CAAW,gBAAX,CAAd;AACA,kBAAMC,OAAO,MAAMD,MAAME,KAAN,CAAY,EAAEM,IAAIA,EAAN,EAAZ,EAAwBC,IAAxB,EAAnB;;AAEA,mBAAO,OAAKH,OAAL,CAAaL,IAAb,CAAP;AALe;AAMlB;;AAEKW,uBAAN,GAA4B;AAAA;;AAAA;AACxB,gBAAI,CAAC,OAAKC,MAAV,EAAkB;AACd,uBAAO,KAAP;AACH;;AAED,kBAAMC,SAAS,OAAKC,IAAL,EAAf;AACAC,oBAAQC,GAAR,CAAY,OAAKpB,GAAL,CAAS,OAAT,CAAZ;AACAmB,oBAAQC,GAAR,CAAYH,MAAZ;AACA,kBAAMN,KAAK,OAAKO,IAAL,CAAU,IAAV,CAAX;;AAEA,kBAAMf,QAAQ,OAAKA,KAAL,CAAW,gBAAX,CAAd;;AAEA,gBAAIQ,KAAK,CAAT,EAAY;AACR,sBAAMR,MAAME,KAAN,CAAY,EAAEM,IAAIA,EAAN,EAAZ,EAAwBU,MAAxB,CAA+BJ,MAA/B,CAAN;AACH,aAFD,MAEO;AACH,uBAAOA,OAAON,EAAd;AACA,sBAAMR,MAAMmB,GAAN,CAAUL,MAAV,CAAN;AACH;AACD,mBAAO,OAAKR,OAAL,CAAaQ,MAAb,CAAP;AAlBwB;AAmB3B;;AAIKM,iBAAN,GAAsB;AAAA;;AAAA;AAClB,kBAAMZ,KAAK,OAAKO,IAAL,CAAU,IAAV,CAAX;AACA,kBAAM,OAAKf,KAAL,CAAW,OAAX,EAAoBE,KAApB,CAA0B,EAAEM,IAAIA,EAAN,EAA1B,EAAsCa,KAAtC,CAA4C,CAA5C,EAA+CC,MAA/C,EAAN;AACA;;AAEA,mBAAO,OAAKhB,OAAL,EAAP;AALkB;AAMrB;AAjE+B,CAApC",
+    "file": "../../../src/admin/controller/topiccategory.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n    /**\n     * index action\n     * @return {Promise} []\n     */\n    async indexAction() {\n        const page = this.get('page') || 1;\n        const size = this.get('size') || 10;\n        const name = this.get('name') || '';\n\n        const model = this.model('topic');\n        const data = await model.where({ title: ['like', `%${name}%`] }).order(['id DESC']).page(page, size).countSelect();\n\n        return this.success(data);\n    }\n    async categoryByIdAction() {\n        const id = this.get('id');\n        const model = this.model('topic');\n        const data = await model.where({ id: id }).find();\n\n        return this.success(data);\n    }\n    async categoryAction() {\n        const model = this.model('topic_category');\n        const data = await model.countSelect();\n\n        return this.success(data);\n    }\n    async infoAction() {\n        const id = this.get('id');\n        const model = this.model('topic_category');\n        const data = await model.where({ id: id }).find();\n\n        return this.success(data);\n    }\n\n    async storeCategoryAction() {\n        if (!this.isPost) {\n            return false;\n        }\n\n        const values = this.post();\n        console.log(this.get('title'));\n        console.log(values);\n        const id = this.post('id');\n\n        const model = this.model('topic_category');\n\n        if (id > 0) {\n            await model.where({ id: id }).update(values);\n        } else {\n            delete values.id;\n            await model.add(values);\n        }\n        return this.success(values);\n    }\n\n\n\n    async destoryAction() {\n        const id = this.post('id');\n        await this.model('topic').where({ id: id }).limit(1).delete();\n        // TODO 删除图片\n\n        return this.success();\n    }\n};"
+    ]
+}

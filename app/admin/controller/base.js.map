@@ -1,0 +1,26 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/admin/controller/base.js"
+    ],
+    "names": [
+        "module",
+        "exports",
+        "think",
+        "Controller",
+        "__before",
+        "ctx",
+        "state",
+        "token",
+        "header",
+        "tokenSerivce",
+        "service",
+        "userId",
+        "getUserId"
+    ],
+    "mappings": ";;AAAAA,OAAOC,OAAP,GAAiB,cAAcC,MAAMC,UAApB,CAA+B;AACtCC,YAAN,GAAiB;AAAA;;AAAA;AACb;AACA,kBAAKC,GAAL,CAASC,KAAT,CAAeC,KAAf,GAAuB,MAAKF,GAAL,CAASG,MAAT,CAAgB,kBAAhB,KAAuC,EAA9D;AACA,kBAAMC,eAAeP,MAAMQ,OAAN,CAAc,OAAd,EAAuB,OAAvB,CAArB;AACA,kBAAKL,GAAL,CAASC,KAAT,CAAeK,MAAf,GAAwB,MAAMF,aAAaG,SAAb,CAAuB,MAAKP,GAAL,CAASC,KAAT,CAAeC,KAAtC,CAA9B;;AAEA;AACA;AACA;AACA;AACA;AACA;AAXa;AAYhB;AAb2C,CAAhD",
+    "file": "../../../src/admin/controller/base.js",
+    "sourcesContent": [
+        "module.exports = class extends think.Controller {\n    async __before() {\n        // 根据token值获取用户id\n        this.ctx.state.token = this.ctx.header['x-nideshop-token'] || '';\n        const tokenSerivce = think.service('token', 'admin');\n        this.ctx.state.userId = await tokenSerivce.getUserId(this.ctx.state.token);\n\n        // 只允许登录操作\n        // if (this.ctx.controller !== 'auth') {\n        //   if (this.ctx.state.userId <= 0) {\n        //     return this.fail(401, '请先登录');\n        //   }\n        // }\n    }\n};"
+    ]
+}

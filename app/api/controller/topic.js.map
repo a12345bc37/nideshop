@@ -1,0 +1,35 @@
+{
+    "version": 3,
+    "sources": [
+        "../../../src/api/controller/topic.js"
+    ],
+    "names": [
+        "Base",
+        "require",
+        "module",
+        "exports",
+        "listAction",
+        "cateid",
+        "get",
+        "model",
+        "where",
+        "topic_category_id",
+        "data",
+        "field",
+        "page",
+        "countSelect",
+        "success",
+        "categoryAction",
+        "detailAction",
+        "id",
+        "find",
+        "relatedAction",
+        "limit",
+        "select"
+    ],
+    "mappings": ";;AAAA,MAAMA,OAAOC,QAAQ,WAAR,CAAb;;AAEAC,OAAOC,OAAP,GAAiB,cAAcH,IAAd,CAAmB;AAC1BI,cAAN,GAAmB;AAAA;;AAAA;AACf,kBAAMC,SAAS,MAAKC,GAAL,CAAS,QAAT,CAAf;;AAEA,kBAAMC,QAAQ,MAAKA,KAAL,CAAW,OAAX,CAAd;AACA,gBAAIF,SAAS,CAAb,EAAgB;AACZE,sBAAMC,KAAN,CAAY,EAAEC,mBAAmBJ,MAArB,EAAZ;AACH;AACD,kBAAMK,OAAO,MAAMH,MAAMI,KAAN,CAAY,CAAC,IAAD,EAAO,OAAP,EAAgB,YAAhB,EAA8B,eAA9B,EAA+C,UAA/C,EAA2D,mBAA3D,CAAZ,EAA6FC,IAA7F,CAAkG,MAAKN,GAAL,CAAS,MAAT,KAAoB,CAAtH,EAAyH,MAAKA,GAAL,CAAS,MAAT,KAAoB,EAA7I,EAAiJO,WAAjJ,EAAnB;;AAEA,mBAAO,MAAKC,OAAL,CAAaJ,IAAb,CAAP;AATe;AAUlB;;AAEKK,kBAAN,GAAuB;AAAA;;AAAA;AACnB,kBAAMR,QAAQ,OAAKA,KAAL,CAAW,gBAAX,CAAd;AACA,kBAAMG,OAAO,MAAMH,MAAMI,KAAN,CAAY,CAAC,IAAD,EAAO,OAAP,EAAgB,SAAhB,CAAZ,EAAwCC,IAAxC,CAA6C,OAAKN,GAAL,CAAS,MAAT,KAAoB,CAAjE,EAAoE,OAAKA,GAAL,CAAS,MAAT,KAAoB,EAAxF,EAA4FO,WAA5F,EAAnB;;AAEA,mBAAO,OAAKC,OAAL,CAAaJ,IAAb,CAAP;AAJmB;AAKtB;;AAIKM,gBAAN,GAAqB;AAAA;;AAAA;AACjB,kBAAMT,QAAQ,OAAKA,KAAL,CAAW,OAAX,CAAd;AACA,kBAAMG,OAAO,MAAMH,MAAMC,KAAN,CAAY,EAAES,IAAI,OAAKX,GAAL,CAAS,IAAT,CAAN,EAAZ,EAAoCY,IAApC,EAAnB;;AAEA,mBAAO,OAAKJ,OAAL,CAAaJ,IAAb,CAAP;AAJiB;AAKpB;;AAEKS,iBAAN,GAAsB;AAAA;;AAAA;AAClB,kBAAMZ,QAAQ,OAAKA,KAAL,CAAW,OAAX,CAAd;AACA,kBAAMG,OAAO,MAAMH,MAAMI,KAAN,CAAY,CAAC,IAAD,EAAO,OAAP,EAAgB,YAAhB,EAA8B,eAA9B,EAA+C,UAA/C,CAAZ,EAAwES,KAAxE,CAA8E,CAA9E,EAAiFC,MAAjF,EAAnB;;AAEA,mBAAO,OAAKP,OAAL,CAAaJ,IAAb,CAAP;AAJkB;AAKrB;AAlC+B,CAApC",
+    "file": "../../../src/api/controller/topic.js",
+    "sourcesContent": [
+        "const Base = require('./base.js');\n\nmodule.exports = class extends Base {\n    async listAction() {\n        const cateid = this.get('cateid');\n\n        const model = this.model('topic');\n        if (cateid > 0) {\n            model.where({ topic_category_id: cateid });\n        }\n        const data = await model.field(['id', 'title', 'price_info', 'scene_pic_url', 'subtitle', 'topic_category_id']).page(this.get('page') || 1, this.get('size') || 10).countSelect();\n\n        return this.success(data);\n    }\n\n    async categoryAction() {\n        const model = this.model('topic_category');\n        const data = await model.field(['id', 'title', 'pic_url']).page(this.get('page') || 1, this.get('size') || 10).countSelect();\n\n        return this.success(data);\n    }\n\n\n\n    async detailAction() {\n        const model = this.model('topic');\n        const data = await model.where({ id: this.get('id') }).find();\n\n        return this.success(data);\n    }\n\n    async relatedAction() {\n        const model = this.model('topic');\n        const data = await model.field(['id', 'title', 'price_info', 'scene_pic_url', 'subtitle']).limit(4).select();\n\n        return this.success(data);\n    }\n};"
+    ]
+}
