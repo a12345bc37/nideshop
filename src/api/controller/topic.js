@@ -8,7 +8,7 @@ module.exports = class extends Base {
         if (cateid > 0) {
             model.where({ topic_category_id: cateid });
         }
-        const data = await model.field(['id', 'title', 'price_info', 'scene_pic_url', 'subtitle', 'topic_category_id']).page(this.get('page') || 1, this.get('size') || 10).countSelect();
+        const data = await model.field(['id', 'title', 'price_info', 'scene_pic_url', 'subtitle', 'topic_category_id', 'avatar']).page(this.get('page') || 1, this.get('size') || 10).countSelect();
 
         return this.success(data);
     }
@@ -31,7 +31,7 @@ module.exports = class extends Base {
 
     async relatedAction() {
         const model = this.model('topic');
-        const data = await model.field(['id', 'title', 'price_info', 'scene_pic_url', 'subtitle']).limit(4).select();
+        const data = await model.field(['id', 'title', 'price_info', 'scene_pic_url', 'subtitle', 'avatar']).limit(4).select();
 
         return this.success(data);
     }
